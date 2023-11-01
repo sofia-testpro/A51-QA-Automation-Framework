@@ -4,11 +4,13 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.testng.Assert;
+import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
 
 import java.time.Duration;
 
 public class LoginTests extends BaseTest {
+
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
         navigateToLoginPage();
@@ -19,11 +21,14 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue (avatar.isDisplayed());
         driver.quit();
     }
-    @Test
-    public void loginEmptyEmailPassword() throws InterruptedException {
+    @Test (dataProvider = "LoginData")
+    public void loginDataProvider (String email, String password) throws InterruptedException {
         navigateToLoginPage();
+        provideEmail(email);
+        providePassword(password);
         clickSubmit();
-        Assert.assertEquals(driver.getCurrentUrl(), url);
+        Thread.sleep(2000);
+        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
         driver.quit();
     }
     @Test
