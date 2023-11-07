@@ -3,6 +3,8 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.DataProvider;
 import org.testng.annotations.Test;
@@ -17,7 +19,8 @@ public class LoginTests extends BaseTest {
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
-        WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
+        // WebElement avatar = driver.findElement(By.cssSelector("img[class='avatar']"));
+        WebElement avatar = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("img[class='avatar']")));
         Assert.assertTrue (avatar.isDisplayed());
         driver.quit();
     }
@@ -27,7 +30,7 @@ public class LoginTests extends BaseTest {
         provideEmail(email);
         providePassword(password);
         clickSubmit();
-        Thread.sleep(2000);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
         driver.quit();
     }
@@ -36,6 +39,7 @@ public class LoginTests extends BaseTest {
         navigateToLoginPage();
         provideEmail("invalidemail@class.com");
         providePassword("te$t$tudent");
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();

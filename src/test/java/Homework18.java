@@ -1,7 +1,10 @@
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.time.Duration;
 
 public class Homework18 extends BaseTest {
     @Test
@@ -20,12 +23,12 @@ public class Homework18 extends BaseTest {
     public void clickPlayNextSong() throws InterruptedException {
         WebElement playNextSongBtn = driver.findElement(By.cssSelector("i[data-testid='play-next-btn']"));
         playNextSongBtn.click();
-        Thread.sleep(2000);
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
     }
 
     public void clickPlaySong() throws InterruptedException {
         WebElement playBtn = driver.findElement(By.cssSelector("span[data-testid='play-btn']"));
         playBtn.click();
-        Thread.sleep(2000);
+        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
     }
 }
