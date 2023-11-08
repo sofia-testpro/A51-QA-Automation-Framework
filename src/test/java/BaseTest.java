@@ -40,11 +40,11 @@ public class BaseTest {
 
 
     // references start here
-    public WebDriver driver = null;
-    public String url = "https://qa.koel.app/";
-    public String loggedInURL = "https://qa.koel.app/#!/home";
-    public WebDriverWait wait;
-    Actions actions;
+    public static WebDriver driver = null;
+    public static String url = null;
+    public static String loggedInURL = null;
+    public static WebDriverWait wait;
+    public static Actions actions;
     //references end here
 
 
