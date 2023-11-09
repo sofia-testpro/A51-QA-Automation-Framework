@@ -25,12 +25,9 @@ public class LoginTests extends BaseTest {
         loginPage.clickSubmit();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-
     }
-
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
-        navigateToLoginPage();
         provideEmail("demo@class.com");
         providePassword("te$t$tudent");
         clickSubmit();
@@ -39,32 +36,43 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue (avatar.isDisplayed());
         driver.quit();
     }
+
+
+    // FLUENT WAY STARTS HERE
+    @Test
+    public void loginValidEmailPasswordByPageFactory() throws InterruptedException {
+       LoginPage loginPage = new LoginPage(driver);
+       HomePage homePage = new HomePage(driver);
+
+       loginPage.provideEmailToLogin("demo@class.com")
+                .providePasswordToLogin("te$t$tudent")
+                .clickSubmitBtn();
+
+       Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+    //FLUENT WAY ENDS HERE
+
+
     @Test (dataProvider = "LoginData")
     public void loginDataProvider (String email, String password) throws InterruptedException {
-        navigateToLoginPage();
         provideEmail(email);
         providePassword(password);
         clickSubmit();
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
-        driver.quit();
     }
     @Test
     public void loginInvalidEmailValidPassword () throws InterruptedException {
-        navigateToLoginPage();
         provideEmail("invalidemail@class.com");
         providePassword("te$t$tudent");
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
     @Test
     public void loginValidEmailNoPassword () throws InterruptedException {
-        navigateToLoginPage();
         provideEmail("demo@class.com");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
-        driver.quit();
     }
 }
