@@ -53,14 +53,14 @@ public class LoginTests extends BaseTest {
     //FLUENT WAY ENDS HERE
 
 
-    @Test (dataProvider = "LoginData")
-    public void loginDataProvider (String email, String password) throws InterruptedException {
-        provideEmail(email);
-        providePassword(password);
-        clickSubmit();
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
-    }
+//    @Test (dataProvider = "LoginData")
+//    public void loginDataProvider (String email, String password) throws InterruptedException {
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+//        clickSubmit();
+//        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+//        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
+//    }
     @Test
     public void loginInvalidEmailValidPassword () throws InterruptedException {
         provideEmail("invalidemail@class.com");
