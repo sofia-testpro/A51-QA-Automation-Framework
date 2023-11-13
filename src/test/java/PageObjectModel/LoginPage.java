@@ -42,13 +42,13 @@ public class LoginPage extends BasePage {
 
 
     public void provideEmail(String email){
-        findElement(emailField).sendKeys(email);
+        findElement((WebElement) emailField).sendKeys(email);
     }
     public void providePassword(String password){
-        findElement(passwordField).sendKeys(password);
+        findElement((WebElement) passwordField).sendKeys(password);
     }
     public void clickSubmit(){
-        findElement(submitBtn).click();
+        findElement((WebElement) submitBtn).click();
     }
     public void login(){
         provideEmail("demo@class.com");

@@ -19,22 +19,22 @@ public class HomePage extends BasePage{
     WebElement selectPlaylist;
     @FindBy(css = "[name='name']")
     WebElement newPlaylistNameField;
+    @FindBy(css="img.avatar")
+    WebElement userAvatarIcon;
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
         actions.doubleClick(selectPlaylist).perform();
     }
-    public HomePage enterNewNameForPlaylist(){
-        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
-        newPlaylistNameField.sendKeys(newNameForPlaylist);
-        newPlaylistNameField.sendKeys(Keys.ENTER);
-        return this;
+    public void enterNewPlaylistName(String playlistName){
+//        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
+//        newPlaylistNameField.sendKeys(newNamePlaylist);
+//        newPlaylistNameField.sendKeys(Keys.ENTER);
+        findElement(newPlaylistNameField).sendKeys(playlistName);
+        findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+        findElement(newPlaylistNameField).sendKeys(playlistName);
+        findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
     }
-
-
-
-    //locators
-    private By userAvatarIcon = By.cssSelector("img.avatar");
 
 
     public WebElement getUserAvatar(){
@@ -46,7 +46,6 @@ public class HomePage extends BasePage{
     }
     public WebElement hoverPlay() {
         WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-        // WebElement play = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='play-btn']")));
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
