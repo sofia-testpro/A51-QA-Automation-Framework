@@ -24,7 +24,7 @@ public class HomePage extends BasePage{
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
-        actions.doubleClick(selectPlaylist).perform();
+      doubleClick(selectPlaylist);
     }
     public void enterNewPlaylistName(String playlistName){
 //        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
