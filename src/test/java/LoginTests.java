@@ -16,6 +16,22 @@ import java.time.Duration;
 public class LoginTests extends BaseTest {
 
     @Test
+    public void loginSuccessTest(){
+
+        LoginPage loginPage = new LoginPage(getDriver());
+        HomePage homePage = new HomePage(getDriver());
+
+        loginPage.provideEmail("demo@class.com");
+        loginPage.providePassword("te$t$tudent");
+        loginPage.clickSubmitBtn();
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
+    @Test
+    public void login
+
+
+    @Test
     public void loginValidEmailPasswordTest(){
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
@@ -75,4 +91,5 @@ public class LoginTests extends BaseTest {
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+
 }

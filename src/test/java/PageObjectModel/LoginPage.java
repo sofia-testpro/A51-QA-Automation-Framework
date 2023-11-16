@@ -1,6 +1,5 @@
 package PageObjectModel;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
@@ -21,9 +20,9 @@ public class LoginPage extends BasePage {
 
 
     //LOCATORS BY
-    private By emailField = By.cssSelector("input[type='email']");
-    private By passwordField = By.cssSelector("input[type='password']");
-    private By submitBtn = By.cssSelector("button[type='submit']");
+     By emailField = By.cssSelector("input[type='email']");
+     By passwordField = By.cssSelector("input[type='password']");
+     By submitBtn = By.cssSelector("button[type='submit']");
 
 
     //HELPER METHODS USING PAGE FACTORY
