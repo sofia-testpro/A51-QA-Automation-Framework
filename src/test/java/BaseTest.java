@@ -72,6 +72,12 @@ public class BaseTest {
 
     @BeforeMethod
     @Parameters({"BaseURL"})
+    public void launchBrowser (String BaseURL) {
+        ChromeOptions options = new ChromeOptions();
+        options.addArguments("--remote-allow-origins=*");
+        driver = new ChromeDriver(options);
+        driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
+
     public void setupBrowser(String BaseURL) throws MalformedURLException {
         threadDriver.set(pickBrowser(System.getProperty("browser")));
         getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));

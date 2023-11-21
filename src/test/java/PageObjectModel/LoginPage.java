@@ -6,28 +6,30 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver givenDriver) {
+
+    // LOCATORS SELENIUM PAGE FACTORY
+    @FindBy(css = "input[type='email']")
+    private WebElement emailTextField;
+    @FindBy(css = "input[type='password']")
+    private WebElement passwordTxtField;
+    @FindBy(css = "button[type='submit']")
+    private WebElement submitButton;
+    @FindBy (css = "input[type='email']")
+    private WebElement emailField;
+    @FindBy (css = "input[type='password']")
+    private WebElement passwordField;
+    @FindBy (css = "button[type='submit']")
+    private WebElement submitBtn;
+
+    public LoginPage (WebDriver givenDriver) {
         super(givenDriver);
     }
 
-    // LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(css = "[type='email']")
-    WebElement emailTxtField;
-    @FindBy(css = "[type='password']")
-    WebElement passwordTxtField;
-    @FindBy(css = "[type='submit']")
-    WebElement submitButton;
 
 
-    //LOCATORS BY
-     By emailField = By.cssSelector("input[type='email']");
-     By passwordField = By.cssSelector("input[type='password']");
-     By submitBtn = By.cssSelector("button[type='submit']");
-
-
-    //HELPER METHODS USING PAGE FACTORY
+    //HELPER METHODS USING SELENIUM PAGE FACTORY
     public LoginPage provideEmailToLogin(String email){
-        emailTxtField.sendKeys(email);
+        emailTextField.sendKeys(email);
         return this;
     }
     public LoginPage providePasswordToLogin(String password){
@@ -40,18 +42,48 @@ public class LoginPage extends BasePage {
     }
 
 
-    public void provideEmail(String email){
-        findElement((WebElement) emailField).sendKeys(email);
+
+
+    public void provideEmail(String email) {
+        findElement(emailField).sendKeys(email);
     }
-    public void providePassword(String password){
-        findElement((WebElement) passwordField).sendKeys(password);
-    }
+    public void providePassword(String password) {
+        findElement(passwordField).sendKeys(password);
+
+   }
     public void clickSubmit(){
-        findElement((WebElement) submitBtn).click();
+        findElement(submitBtn).click();
     }
     public void login(){
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        provideEmailToLogin("demo@class.com");
+        providePasswordToLogin("te$t$tudent");
+        clickSubmitBtn();
     }
+
+    /* PAGE OBJECT MODEL (POM)
+    private By submitButtonLocator = By.cssSelector("[type='submit']");
+    private By emailField = By.cssSelector("[type='email']");
+    private By passwordField = By.cssSelector("[type='password']");
+
+    public LoginPage (WebDriver givenDriver) {
+        super(givenDriver);
+    }
+
+    public LoginPage clickSubmitBtn(){
+    driver.findElement(submitButtonLocator).click();
+    return this;
+    }
+
+    public loginPage provideEmail (String email){
+    WebElement emailElement = driver.findElement(emailField);
+    emailElement.sendKeys(email);
+    return this;
+    }
+
+    public loginPage providePassword (String password){
+    WebElement passwordElement = driver.findElement(passwordField);
+    passwordElement.sendKeys(password);
+    return this;
+    }
+    */
 }
