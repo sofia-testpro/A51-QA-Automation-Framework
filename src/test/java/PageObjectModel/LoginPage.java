@@ -1,32 +1,30 @@
 package PageObjectModel;
-
-import com.fasterxml.jackson.databind.ser.Serializers;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPage extends BasePage {
-    public LoginPage(WebDriver givenDriver) {
-        super(givenDriver);
-    }
 
     // LOCATORS SELENIUM PAGE FACTORY
     @FindBy(css = "[type='email']")
-    WebElement emailTxtField;
+    private WebElement emailTxtField;
     @FindBy(css = "[type='password']")
-    WebElement passwordTxtField;
+    private WebElement passwordTxtField;
     @FindBy(css = "[type='submit']")
-    WebElement submitButton;
+    private WebElement submitButton;
+    @FindBy (css = "input[type='email']")
+    private WebElement emailField;
+    @FindBy (css = "input[type='password']")
+    private WebElement passwordField;
+    @FindBy (css = "button[type='submit']")
+    private WebElement submitBtn;
+
+    public LoginPage (WebDriver givenDriver) {
+        super(givenDriver);
+    }
 
 
-    //LOCATORS BY
-    private By emailField = By.cssSelector("input[type='email']");
-    private By passwordField = By.cssSelector("input[type='password']");
-    private By submitBtn = By.cssSelector("button[type='submit']");
-
-
-    //HELPER METHODS USING PAGE FACTORY
+    //HELPER METHODS USING SELENIUM PAGE FACTORY
     public LoginPage provideEmailToLogin(String email){
         emailTxtField.sendKeys(email);
         return this;
@@ -41,10 +39,10 @@ public class LoginPage extends BasePage {
     }
 
 
-    public void provideEmail(String email){
+    public void provideEmail(String email) {
         findElement(emailField).sendKeys(email);
     }
-    public void providePassword(String password){
+    public void providePassword(String password) {
         findElement(passwordField).sendKeys(password);
     }
     public void clickSubmit(){
@@ -55,4 +53,31 @@ public class LoginPage extends BasePage {
         providePassword("te$t$tudent");
         clickSubmit();
     }
+
+    /* PAGE OBJECT MODEL (POM)
+    private By submitButtonLocator = By.cssSelector("[type='submit']");
+    private By emailField = By.cssSelector("[type='email']");
+    private By passwordField = By.cssSelector("[type='password']");
+
+    public LoginPage (WebDriver givenDriver) {
+        super(givenDriver);
+    }
+
+    public LoginPage clickSubmitBtn(){
+    driver.findElement(submitButtonLocator).click();
+    return this;
+    }
+
+    public loginPage provideEmail (String email){
+    WebElement emailElement = driver.findElement(emailField);
+    emailElement.sendKeys(email);
+    return this;
+    }
+
+    public loginPage providePassword (String password){
+    WebElement passwordElement = driver.findElement(passwordField);
+    passwordElement.sendKeys(password);
+    return this;
+    }
+    */
 }
