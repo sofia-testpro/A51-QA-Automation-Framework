@@ -6,11 +6,11 @@ import org.openqa.selenium.support.FindBy;
 public class LoginPage extends BasePage {
 
     // LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(css = "[type='email']")
-    private WebElement emailTxtField;
-    @FindBy(css = "[type='password']")
+    @FindBy(css = "input[type='email']")
+    private WebElement emailTextField;
+    @FindBy(css = "input[type='password']")
     private WebElement passwordTxtField;
-    @FindBy(css = "[type='submit']")
+    @FindBy(css = "button[type='submit']")
     private WebElement submitButton;
     @FindBy (css = "input[type='email']")
     private WebElement emailField;
@@ -24,9 +24,10 @@ public class LoginPage extends BasePage {
     }
 
 
+
     //HELPER METHODS USING SELENIUM PAGE FACTORY
     public LoginPage provideEmailToLogin(String email){
-        emailTxtField.sendKeys(email);
+        emailTextField.sendKeys(email);
         return this;
     }
     public LoginPage providePasswordToLogin(String password){
@@ -39,6 +40,7 @@ public class LoginPage extends BasePage {
     }
 
 
+
     public void provideEmail(String email) {
         findElement(emailField).sendKeys(email);
     }
@@ -49,9 +51,9 @@ public class LoginPage extends BasePage {
         findElement(submitBtn).click();
     }
     public void login(){
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
+        provideEmailToLogin("demo@class.com");
+        providePasswordToLogin("te$t$tudent");
+        clickSubmitBtn();
     }
 
     /* PAGE OBJECT MODEL (POM)

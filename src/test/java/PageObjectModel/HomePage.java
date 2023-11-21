@@ -11,7 +11,7 @@ public class HomePage extends BasePage{
     String newNameForPlaylist = "test";
 
     //LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(css = "[.playlist:nth-child(3)]")
+    @FindBy(css = "href=['#!/playlist/76749']")
     WebElement selectPlaylist;
     @FindBy(css = "[name='name']")
     WebElement newPlaylistNameField;
@@ -25,6 +25,7 @@ public class HomePage extends BasePage{
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
+        WebElement selectPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("href=['#!/playlist/76749']")));
         doubleClick(selectPlaylist);
     }
     public HomePage enterNewNameForPlaylist(String playlistName){

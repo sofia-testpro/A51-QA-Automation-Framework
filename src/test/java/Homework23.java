@@ -7,7 +7,7 @@ import java.time.Duration;
 
 public class Homework23 extends BaseTest {
     @Test
-    public void renameTestPlaylist() {
+    public void renameTestPlaylist()  {
 
         String updatedPlaylistMsg = "Updated playlist \"test.\"";
 
