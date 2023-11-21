@@ -11,7 +11,7 @@ public class HomePage extends BasePage{
     String newNameForPlaylist = "test";
 
     //LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(css = "href=['#!/playlist/76749']")
+   @FindBy(css = "href=['#!/playlist/76749']")
     WebElement selectPlaylist;
     @FindBy(css = "[name='name']")
     WebElement newPlaylistNameField;
@@ -34,6 +34,20 @@ public class HomePage extends BasePage{
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
         return this;
+
+    //Helpers
+    public void doubleClickOnSelectedPlaylist() {
+      doubleClick(selectPlaylist);
+    }
+    public void enterNewPlaylistName(String playlistName){
+//        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
+//        newPlaylistNameField.sendKeys(newNamePlaylist);
+//        newPlaylistNameField.sendKeys(Keys.ENTER);
+        findElement(newPlaylistNameField).sendKeys(playlistName);
+        findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
+        findElement(newPlaylistNameField).sendKeys(playlistName);
+        findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
+
     }
     public WebElement getUserAvatar() {
         return findElement(userAvatar);
@@ -41,14 +55,22 @@ public class HomePage extends BasePage{
 
     public String getPlaylistName () {
         return findElement(selectPlaylist).getText();
+
+
+    public WebElement getUserAvatar(){
+        return findElement(userAvatarIcon);
+
     }
 
     public void chooseAllSongsList(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
     }
     public WebElement hoverPlay() {
+
         WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         // WebElement play = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='play-btn']")));
+
+        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }

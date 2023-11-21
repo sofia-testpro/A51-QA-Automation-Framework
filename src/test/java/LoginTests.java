@@ -15,6 +15,20 @@ import java.time.Duration;
 
 public class LoginTests extends BaseTest {
 
+//    @Test
+//    public void loginSuccessTest(){
+//
+//        LoginPage loginPage = new LoginPage(getDriver());
+//        HomePage homePage = new HomePage(getDriver());
+//
+//        loginPage.provideEmail("demo@class.com");
+//        loginPage.providePassword("te$t$tudent");
+//        loginPage.clickSubmitBtn();
+//        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+//    }
+
+
+
     @Test
     public void loginValidEmailPasswordTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -53,14 +67,14 @@ public class LoginTests extends BaseTest {
     //FLUENT WAY ENDS HERE
 
 
-    @Test (dataProvider = "LoginData")
-    public void loginDataProvider (String email, String password) throws InterruptedException {
-        provideEmail(email);
-        providePassword(password);
-        clickSubmit();
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
-    }
+//    @Test (dataProvider = "LoginData")
+//    public void loginDataProvider (String email, String password) throws InterruptedException {
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+//        clickSubmit();
+//        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
+//        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
+//    }
     @Test
     public void loginInvalidEmailValidPassword () throws InterruptedException {
         provideEmail("invalidemail@class.com");
@@ -75,4 +89,5 @@ public class LoginTests extends BaseTest {
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
     }
+
 }

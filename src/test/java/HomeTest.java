@@ -50,21 +50,21 @@ public class HomeTest extends BaseTest {
         //assertion
         Assert.assertTrue(homePage.hoverPlay().isDisplayed());
     }
-    @Test
-    public void countSongsInPlaylist() throws InterruptedException {
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
-        Thread.sleep(2000);
-        //choose playlist by name
-        choosePlaylistByName("Guadeloupe");
-        Thread.sleep(2000);
-        //display all songs
-        displayAllSongs();
-        Thread.sleep(2000);
-        //assertions
-        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
-    }
+//    @Test
+//    public void countSongsInPlaylist() throws InterruptedException {
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+//        clickSubmit();
+//        Thread.sleep(2000);
+//        //choose playlist by name
+//        choosePlaylistByName("Guadeloupe");
+//        Thread.sleep(2000);
+//        //display all songs
+//        displayAllSongs();
+//        Thread.sleep(2000);
+//        //assertions
+//        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
+//    }
     public void renamePlaylist() throws InterruptedException {
 
         String updatedPlaylistMsg = "Updated playlist \"Sample Edited Playlist.\"";

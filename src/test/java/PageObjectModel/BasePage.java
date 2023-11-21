@@ -1,7 +1,6 @@
 package PageObjectModel;
 
 import com.fasterxml.jackson.databind.ser.Serializers;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.devtools.v85.page.Page;
@@ -48,8 +47,19 @@ public class BasePage {
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
+
      protected WebElement findElement (By locator){
         return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
+
+    public WebElement findElement(WebElement webElement){
+        return wait.until(ExpectedConditions.visibilityOf(webElement));
+    }
+    public void click (WebElement webElement){
+        findElement(webElement).click();
+    }
+    public void doubleClick(WebElement webElement){
+        actions.doubleClick(findElement(webElement)).perform();
+
     }
     protected void click (By locator) {
         wait.until(ExpectedConditions.elementToBeClickable(locator));
