@@ -1,4 +1,4 @@
-package PageObjectModel;
+package pageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -11,12 +11,15 @@ public class HomePage extends BasePage{
     String newNameForPlaylist = "test";
 
     //LOCATORS SELENIUM PAGE FACTORY
-   @FindBy(css = "href=['#!/playlist/76749']")
+    @FindBy(css = ".playlist:nth-child(3)")
     WebElement selectPlaylist;
     @FindBy(css = "[name='name']")
     WebElement newPlaylistNameField;
     @FindBy(css="img.avatar")
     WebElement userAvatar;
+
+    @FindBy(css = "playlist playlist")
+    WebElement playlist;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -25,21 +28,19 @@ public class HomePage extends BasePage{
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
-        WebElement selectPlaylist = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("href=['#!/playlist/76749']")));
+        findElement(selectPlaylist);
         doubleClick(selectPlaylist);
     }
-    public HomePage enterNewNameForPlaylist(String playlistName){
+
+    public HomePage enterNewNameForPlaylist(String playlistName) {
         findElement(newPlaylistNameField).sendKeys(playlistName);
-        findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
+        findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
         return this;
-
-    //Helpers
-    public void doubleClickOnSelectedPlaylist() {
-      doubleClick(selectPlaylist);
     }
-    public void enterNewPlaylistName(String playlistName){
+
+    public void enterNewPlaylistName (String playlistName) {
 //        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
 //        newPlaylistNameField.sendKeys(newNamePlaylist);
 //        newPlaylistNameField.sendKeys(Keys.ENTER);
@@ -53,23 +54,14 @@ public class HomePage extends BasePage{
         return findElement(userAvatar);
     }
 
-    public String getPlaylistName () {
-        return findElement(selectPlaylist).getText();
-
-
-    public WebElement getUserAvatar(){
-        return findElement(userAvatarIcon);
-
-    }
+    public String getPlaylistName() {
+            return findElement(selectPlaylist).getText();
+        }
 
     public void chooseAllSongsList(){
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
     }
     public WebElement hoverPlay() {
-
-        WebElement play = driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-        // WebElement play = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='play-btn']")));
-
         WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));

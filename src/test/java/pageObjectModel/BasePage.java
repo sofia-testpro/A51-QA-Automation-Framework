@@ -1,9 +1,7 @@
-package PageObjectModel;
+package pageObjectModel;
 
-import com.fasterxml.jackson.databind.ser.Serializers;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.devtools.v85.page.Page;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.support.PageFactory;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -21,7 +19,7 @@ public class BasePage {
     //SELENIUM PAGE FACTORY
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(30));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
@@ -32,10 +30,10 @@ public class BasePage {
         findElement(webElement).click();
     }
     protected void doubleClick (WebElement webElement) {
-        actions.doubleClick(findElement(webElement)).perform();
+        actions.doubleClick(findElement(webElement));
     }
     protected void contextClick(WebElement webElement) {
-        actions.contextClick(findElement(webElement)).perform();
+        actions.contextClick(findElement(webElement));
     }
 
     /*
