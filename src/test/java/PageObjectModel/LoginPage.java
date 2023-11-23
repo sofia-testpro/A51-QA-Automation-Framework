@@ -54,4 +54,8 @@ public class LoginPage extends BasePage {
         providePassword("te$t$tudent");
         clickSubmit();
     }
+
+    public void getRegistrationLink(){
+
+    }
 }
