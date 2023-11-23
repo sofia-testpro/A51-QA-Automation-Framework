@@ -1,10 +1,7 @@
-import PageObjectModel.HomePage;
-import PageObjectModel.LoginPage;
+import pageObjectModel.HomePage;
+import pageObjectModel.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-import java.util.UUID;
-
-import java.time.Duration;
 
 public class Homework23 extends BaseTest {
     @Test
