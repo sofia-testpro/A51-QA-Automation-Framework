@@ -21,10 +21,11 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getDriver());
         HomePage homePage = new HomePage(getDriver());
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
         loginPage.clickSubmitBtn();
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+        driver.quit();
     }
 
 
@@ -33,11 +34,12 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(driver);
         HomePage homePage = new HomePage(driver);
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        driver.quit();
     }
     @Test
     public void loginValidEmailPassword() throws InterruptedException {
@@ -62,18 +64,9 @@ public class LoginTests extends BaseTest {
                 .clickSubmitBtn();
 
        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+        driver.quit();
     }
-    //FLUENT WAY ENDS HERE
 
-
-//    @Test (dataProvider = "LoginData")
-//    public void loginDataProvider (String email, String password) throws InterruptedException {
-//        provideEmail("demo@class.com");
-//        providePassword("te$t$tudent");
-//        clickSubmit();
-//        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-//        Assert.assertEquals(driver.getCurrentUrl(), loggedInURL);
-//    }
     @Test
     public void loginInvalidEmailValidPassword () throws InterruptedException {
         provideEmail("invalidemail@class.com");
@@ -81,12 +74,14 @@ public class LoginTests extends BaseTest {
         wait = new WebDriverWait(driver,Duration.ofSeconds(10));
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.quit();
     }
     @Test
     public void loginValidEmailNoPassword () throws InterruptedException {
         provideEmail("demo@class.com");
         clickSubmit();
         Assert.assertEquals(driver.getCurrentUrl(), url);
+        driver.quit();
     }
 
 }

@@ -43,11 +43,6 @@ public class BaseTest {
                 {"", ""}
         };
     }
-    @DataProvider(name="excelData")
-    public Object[][] excelDP() throws IOException{
-        Object[][] arrObj = getExcelData("LocationFile","Name of the File");
-        return arrObj;
-    }
     // data provider end here
 
 
@@ -98,7 +93,7 @@ public class BaseTest {
         navigateToLoginPage(BaseURL);
     }
 
-    public static WebDriver pickBrowser(String browser) throws MalformedURLException {
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities caps = new DesiredCapabilities();
         String gridURL ="http:/http://192.168.1.90:4444/";
 
@@ -174,43 +169,16 @@ public class BaseTest {
 
         return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey+ hub), caps);
     }
-//    @AfterMethod
-//    public void closeBrowser(){
-//        driver.quit();
-//    }
+    @AfterMethod
+   public void closeBrowser(){
+        driver.quit();
+    }
 
 //    @AfterMethod
 //    public void tearDown(){
 //        threadDriver.get().close();
 //        threadDriver.remove();
 //    }
-    public String[][] getExcelData(String fileName, String sheetName){
-       String[][] data = null;
-       try{
-           FileInputStream fileInputStream = new FileInputStream(fileName);
-           XSSFWorkbook workbook = new XSSFWorkbook(fileInputStream);
-           XSSFSheet sheet = workbook.getSheet(sheetName);
-           XSSFRow row = sheet.getRow(0);
 
-           int numOfRows = sheet.getPhysicalNumberOfRows();
-           int numOfColumns = row.getLastCellNum();
-
-           XSSFCell cell;
-
-           data = new String[numOfRows-1][numOfColumns];
-
-           for(int i = 1; i < numOfRows; i++){
-               for(int j=0; j < numOfColumns; j++){
-                   row = sheet.getRow(i);
-                   cell = row.getCell(j);
-                   data[i-1][j]=cell.getStringCellValue();
-               }
-           }
-       }
-       catch (Exception e) {
-           System.out.println("Something went wrong."+e);
-       }
-       return data;
-    }
 
 }

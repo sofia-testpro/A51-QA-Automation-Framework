@@ -12,17 +12,21 @@ public class LoginPage extends BasePage {
 
     // LOCATORS SELENIUM PAGE FACTORY
     @FindBy(css = "[type='email']")
-    WebElement emailTxtField;
+     WebElement emailTxtField;
     @FindBy(css = "[type='password']")
-    WebElement passwordTxtField;
+     WebElement passwordTxtField;
     @FindBy(css = "[type='submit']")
-    WebElement submitButton;
+     WebElement submitButton;
+
+    @FindBy (css = "a[href='registration']")
+     WebElement registrationLink;
 
 
     //LOCATORS BY
      By emailField = By.cssSelector("input[type='email']");
      By passwordField = By.cssSelector("input[type='password']");
      By submitBtn = By.cssSelector("button[type='submit']");
+     //By registrationLink = By.cssSelector("a[href='registration']");
 
 
     //HELPER METHODS USING PAGE FACTORY
@@ -55,7 +59,7 @@ public class LoginPage extends BasePage {
         clickSubmit();
     }
 
-    public void getRegistrationLink(){
-
+    public WebElement getRegistrationLink(){
+        return findElement (registrationLink);
     }
 }
