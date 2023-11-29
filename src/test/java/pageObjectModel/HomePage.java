@@ -10,48 +10,53 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 public class HomePage extends BasePage{
     String newNameForPlaylist = "test";
 
-    //LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(xpath = "//li[@class='playlist playlist']//a")
-    WebElement selectPlaylist;
-    @FindBy(css = "input[name='name']")
-    WebElement newPlaylistNameField;
-    @FindBy(css="img.avatar")
-    WebElement userAvatar;
-    @FindBy(css = "div.success.show")
-    WebElement nameMessage;
-
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
     }
 
+    //LOCATORS SELENIUM PAGE FACTORY
+    @FindBy(css = "[.playlist:nth-child(3)]")
+    WebElement selectPlaylist;
+    @FindBy(css = "[name='name']")
+    WebElement newPlaylistNameField;
+    @FindBy(css="img[class='avatar']")
+    WebElement userAvatarIcon;
+    @FindBy(css = "a.view-profile")
+    WebElement profileBtn;
+
+    @FindBy (css = "a.view-profile>span")
+    WebElement profileName;
+
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
-        doubleClick(selectPlaylist);
+      doubleClick(selectPlaylist);
     }
-
-    public HomePage enterNewNameForPlaylist(String playlistName) {
+    public void enterNewPlaylistName(String playlistName){
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
-        return this;
     }
 
-    public String getRenamePlaylistSuccessMsg(){
-        return findElement(nameMessage).getText();
+    public WebElement getUserAvatar(){
+        return findElement(userAvatarIcon);
     }
 
-//    public String getPlaylistName() {
-//            return findElement(selectPlaylist).getText();
-//        }
-//
-//    public void chooseAllSongsList(){
-//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
-//    }
-//    public WebElement hoverPlay() {
-//        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-//        actions.moveToElement(play).perform();
-//        return wait.until(ExpectedConditions.visibilityOf(play));
-//    }
+    public void chooseAllSongsList(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
+    }
+    public WebElement hoverPlay() {
+        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+        actions.moveToElement(play).perform();
+        return wait.until(ExpectedConditions.visibilityOf(play));
+    }
+    public void clickProfile () {
+        wait.until(ExpectedConditions.visibilityOf(profileBtn)).click();
+    }
+
+    public WebElement getProfileName(){
+        return findElement(profileName);
+    }
+
 }

@@ -10,44 +10,16 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 import java.time.Duration;
 
 public class BasePage {
-
     protected WebDriver driver;
-    protected WebDriverWait wait;
+    public WebDriverWait wait;
     protected Actions actions;
 
-
-    //SELENIUM PAGE FACTORY
     public BasePage(WebDriver givenDriver){
         driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
+        wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
-    protected WebElement findElement(WebElement webElement){
-        return wait.until(ExpectedConditions.visibilityOf(webElement));
-    }
-    protected void click (WebElement webElement) {
-        findElement(webElement).click();
-    }
-    protected void doubleClick (WebElement webElement) {
-        actions.doubleClick(findElement(webElement));
-    }
-    protected void contextClick(WebElement webElement) {
-        actions.contextClick(findElement(webElement));
-    }
-
-    /*
-    PAGE OBJECT MODEL(POM):
-
-    public BasePage(WebDriver givenDriver){
-        driver = givenDriver;
-        wait = new WebDriverWait(driver, Duration.ofSeconds(5));
-        actions = new Actions(driver);
-        PageFactory.initElements(driver, this);
-    }
-
-     protected WebElement findElement (By locator){
-        return wait.until(ExpectedConditions.visibilityOfElementLocated(locator));
 
     public WebElement findElement(WebElement webElement){
         return wait.until(ExpectedConditions.visibilityOf(webElement));
@@ -57,18 +29,8 @@ public class BasePage {
     }
     public void doubleClick(WebElement webElement){
         actions.doubleClick(findElement(webElement)).perform();
+    }
 
-    }
-    protected void click (By locator) {
-        wait.until(ExpectedConditions.elementToBeClickable(locator));
-    }
-    protected void doubleClick (By locator) {
-        actions.doubleClick(findElement(locator)).perform();
-    }
-    protected void contextClick (By locator) {
-        actions.contextClick(findElement(locator)).perform();
-    }
-     */
 
 
 }
