@@ -33,18 +33,6 @@ import org.apache.poi.xssf.usermodel.XSSFCell;
 import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
-    //data providers start here
-    @DataProvider(name="LoginData")
-    public Object[][] getDataFromDataProvider() {
-        return new Object[][]{
-                {"demo@class.com", "te$t$tudent"},
-                {"invalidemail@class.com", "te$t$tudent"},
-                {"demo@class.com", "InvalidPassword"},
-                {"", ""}
-        };
-    }
-    // data provider end here
-
 
     // references start here
     public static WebDriver driver = null;

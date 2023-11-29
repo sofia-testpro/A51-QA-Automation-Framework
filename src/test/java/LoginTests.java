@@ -27,8 +27,6 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
         driver.quit();
     }
-
-
     @Test
     public void loginValidEmailPasswordTest(){
         LoginPage loginPage = new LoginPage(driver);
@@ -51,9 +49,6 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue (avatar.isDisplayed());
         driver.quit();
     }
-
-
-    // FLUENT WAY STARTS HERE
     @Test
     public void loginValidEmailPasswordByPageFactory() throws InterruptedException {
        LoginPage loginPage = new LoginPage(driver);
@@ -83,4 +78,4 @@ public class LoginTests extends BaseTest {
         Assert.assertEquals(driver.getCurrentUrl(), url);
         driver.quit();
     }
-}   
+}
