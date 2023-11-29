@@ -11,15 +11,14 @@ public class HomePage extends BasePage{
     String newNameForPlaylist = "test";
 
     //LOCATORS SELENIUM PAGE FACTORY
-    @FindBy(css = ".playlist:nth-child(3)")
+    @FindBy(xpath = "//li[@class='playlist playlist']//a")
     WebElement selectPlaylist;
-    @FindBy(css = "[name='name']")
+    @FindBy(css = "input[name='name']")
     WebElement newPlaylistNameField;
     @FindBy(css="img.avatar")
     WebElement userAvatar;
-
-    @FindBy(css = "playlist playlist")
-    WebElement playlist;
+    @FindBy(css = "div.success.show")
+    WebElement nameMessage;
 
     public HomePage(WebDriver givenDriver) {
         super(givenDriver);
@@ -28,7 +27,6 @@ public class HomePage extends BasePage{
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
-        findElement(selectPlaylist);
         doubleClick(selectPlaylist);
     }
 
@@ -40,30 +38,20 @@ public class HomePage extends BasePage{
         return this;
     }
 
-    public void enterNewPlaylistName (String playlistName) {
-//        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
-//        newPlaylistNameField.sendKeys(newNamePlaylist);
-//        newPlaylistNameField.sendKeys(Keys.ENTER);
-        findElement(newPlaylistNameField).sendKeys(playlistName);
-        findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
-        findElement(newPlaylistNameField).sendKeys(playlistName);
-        findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
-
-    }
-    public WebElement getUserAvatar() {
-        return findElement(userAvatar);
+    public String getRenamePlaylistSuccessMsg(){
+        return findElement(nameMessage).getText();
     }
 
-    public String getPlaylistName() {
-            return findElement(selectPlaylist).getText();
-        }
-
-    public void chooseAllSongsList(){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
-    }
-    public WebElement hoverPlay() {
-        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
-        actions.moveToElement(play).perform();
-        return wait.until(ExpectedConditions.visibilityOf(play));
-    }
+//    public String getPlaylistName() {
+//            return findElement(selectPlaylist).getText();
+//        }
+//
+//    public void chooseAllSongsList(){
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("li a.songs"))).click();
+//    }
+//    public WebElement hoverPlay() {
+//        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
+//        actions.moveToElement(play).perform();
+//        return wait.until(ExpectedConditions.visibilityOf(play));
+//    }
 }

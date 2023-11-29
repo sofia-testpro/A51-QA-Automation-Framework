@@ -20,10 +20,10 @@ public class Homework23 extends BaseTest {
 
         homePage.doubleClickOnSelectedPlaylist();
 
-        homePage.enterNewNameForPlaylist("test1");
+        homePage.enterNewNameForPlaylist("Lalita");
 
 
-        Assert.assertEquals(homePage.getPlaylistName(),updatedPlaylistMsg);
+        Assert.assertEquals(homePage.getRenamePlaylistSuccessMsg(),updatedPlaylistMsg);
 
     }
 }
