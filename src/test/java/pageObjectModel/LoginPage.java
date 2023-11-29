@@ -1,4 +1,4 @@
-package PageObjectModel;
+package pageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -21,15 +21,6 @@ public class LoginPage extends BasePage {
     @FindBy (css = "a[href='registration']")
      WebElement registrationLink;
 
-
-    //LOCATORS BY
-     By emailField = By.cssSelector("input[type='email']");
-     By passwordField = By.cssSelector("input[type='password']");
-     By submitBtn = By.cssSelector("button[type='submit']");
-     //By registrationLink = By.cssSelector("a[href='registration']");
-
-
-    //HELPER METHODS USING PAGE FACTORY
     public LoginPage provideEmailToLogin(String email){
         emailTxtField.sendKeys(email);
         return this;
@@ -42,24 +33,32 @@ public class LoginPage extends BasePage {
         submitButton.click();
         return this;
     }
-
-
-    public void provideEmail(String email){
-        findElement((WebElement) emailField).sendKeys(email);
-    }
-    public void providePassword(String password){
-        findElement((WebElement) passwordField).sendKeys(password);
-    }
-    public void clickSubmit(){
-        findElement((WebElement) submitBtn).click();
-    }
-    public void login(){
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
-    }
-
     public WebElement getRegistrationLink(){
         return findElement (registrationLink);
     }
+
+
+    //LOCATORS BY
+//     By emailField = By.cssSelector("input[type='email']");
+//     By passwordField = By.cssSelector("input[type='password']");
+//     By submitBtn = By.cssSelector("button[type='submit']");
+//     By registrationLink = By.cssSelector("a[href='registration']");
+
+
+//    public void provideEmail(String email){
+//        findElement((WebElement) emailField).sendKeys(email);
+//    }
+//    public void providePassword(String password){
+//        findElement((WebElement) passwordField).sendKeys(password);
+//    }
+//    public void clickSubmit(){
+//        findElement((WebElement) submitBtn).click();
+//    }
+//    public void login(){
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+//        clickSubmit();
+//    }
+
+
 }

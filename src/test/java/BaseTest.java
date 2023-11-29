@@ -9,6 +9,7 @@ import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.edge.EdgeOptions;
 import org.openqa.selenium.firefox.FirefoxDriver;
+import org.openqa.selenium.firefox.FirefoxOptions;
 import org.openqa.selenium.interactions.Actions;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
@@ -34,113 +35,25 @@ import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
 
-    // references start here
-    public static WebDriver driver = null;
-    public static String url = "https://qa.koel.app/";
-    public static String loggedInURL = "https://qa.koel.app/#!/home";
-    public static WebDriverWait wait;
-    public static Actions actions;
+//    public static String url = "https://qa.koel.app/";
+//    public static String loggedInURL = "https://qa.koel.app/#!/home";
 
-    private static final ThreadLocal<WebDriver> threadDriver = new ThreadLocal<>();
-    //references end here
-
-
-
-    @BeforeSuite
-    static void setupClass() {
-        // WebDriverManager.chromedriver().setup();
-        // WebDriverManager.firefoxdriver().setup();
-        // WebDriverManager.safaridriver().setup();
-    }
-
-    @BeforeMethod
-    @Parameters({"BaseURL"})
-    public void setupBrowser(String BaseURL) throws MalformedURLException {
-        threadDriver.set(pickBrowser(System.getProperty("browser")));
-        getDriver().manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        navigateToLoginPage(BaseURL);
-    }
-    public static WebDriver getDriver(){
-        return threadDriver.get();
+    private static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
+    private WebDriver driver = null;
+    private int timeSeconds = 3;
+    public static WebDriver getThreadLocal() {
+        return THREAD_LOCAL.get();
     }
 
 
     @BeforeMethod
-    @Parameters({"BaseURL"})
-    public void launchBrowser (String BaseURL) throws MalformedURLException {
-        //ChromeOptions options = new ChromeOptions();
-        //options.addArguments("--remote-allow-origins=*");
-        //driver = new ChromeDriver(options);
-        driver = pickBrowser(System.getProperty("browser"));
-        //driver = new FirefoxDriver();
-        //driver = new SafariDriver();
-        //driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(10));
-        wait = new WebDriverWait(driver,Duration.ofSeconds(10));
-        actions = new Actions(driver);
-        driver.manage().window().maximize();
-        navigateToLoginPage(BaseURL);
-    }
-
-    public WebDriver pickBrowser(String browser) throws MalformedURLException {
-        DesiredCapabilities caps = new DesiredCapabilities();
-        String gridURL ="http:/http://192.168.1.90:4444/";
-
-        switch (browser){
-            case "firefox":
-                WebDriverManager.firefoxdriver().setup();
-                return driver = new FirefoxDriver();
-
-            case "MicrosoftEdge":
-                WebDriverManager.edgedriver().setup();
-                EdgeOptions edgeOptions = new EdgeOptions();
-                edgeOptions.addArguments("--remote-allow-origins=*");
-                return driver = new EdgeDriver(edgeOptions);
-
-            case"grid-edge": // gradle clean test -Dbrowser=grid-edge
-                    caps.setCapability("browser","MicrosoftEdge");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
-
-            case"grid-firefox": // gradle clean test -Dbrowser=firefox
-                caps.setCapability("browserName","firefox");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
-
-            case"grid-chrome": // gradle clean test -Dbrowser=chrome
-                caps.setCapability("browserName","chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(),caps);
-
-            case "cloud":
-                return lambdaTest();
-
-            default:
-                WebDriverManager.chromedriver().setup();
-                ChromeOptions options = new ChromeOptions();
-                options.addArguments("--remote-allow-origins=*");
-                return driver = new ChromeDriver(options);
-        }
-
-    }
-    public void navigateToLoginPage(){
-        driver.get(url);
-    }
-    public void navigateToLoginPage(String BaseURL){
-        driver.get(BaseURL);
-    }
-    public void provideEmail(String email){
-        //WebElement emailField = driver.findElement(By.cssSelector("input[type='email']"));
-        WebElement emailField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='email']")));
-        emailField.clear();
-        emailField.sendKeys(email);
-    }
-    public void providePassword(String password){
-        //WebElement passwordField = driver.findElement(By.cssSelector("input[type='password']"));
-        WebElement passwordField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("input[type='password']")));
-        passwordField.clear();
-        passwordField.sendKeys(password);
-    }
-    public void clickSubmit() {
-        //WebElement submit = driver.findElement(By.cssSelector("button[type='submit']"));
-        WebElement submit = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("button[type='submit']")));
-        submit.click();
+    @Parameters({"baseURL"})
+    public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
+        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
+        THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
+        getThreadLocal().get(baseURL);
+        System.out.println(
+                "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
     }
 
     public WebDriver lambdaTest() throws MalformedURLException {
@@ -157,16 +70,45 @@ public class BaseTest {
 
         return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey+ hub), caps);
     }
+
+    public WebDriver pickBrowser(String browser) throws MalformedURLException {
+        DesiredCapabilities capabilities = new DesiredCapabilities();
+        String gridURL = "http://10.2.127.17:4444";
+
+        switch (browser) {
+            case "firefox":
+                WebDriverManager.firefoxdriver().setup();
+                FirefoxOptions optionsFirefox = new FirefoxOptions();
+                optionsFirefox.addArguments("-private");
+                return driver = new FirefoxDriver(optionsFirefox);
+            case "edge":
+                WebDriverManager.edgedriver().setup();
+                return driver = new EdgeDriver();
+            case "grid-firefox":
+                capabilities.setCapability("browserName", "firefox");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-edge":
+                capabilities.setCapability("browserName", "edge");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "grid-chrome":
+                capabilities.setCapability("browserName", "chrome");
+                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+            case "cloud":
+                return lambdaTest();
+            default:
+                WebDriverManager.chromedriver().setup();
+                ChromeOptions optionsChrome = new ChromeOptions();
+                optionsChrome.addArguments("--disable-notifications", "--remote-allow-origins=*", "--incognito", "--start-maximized");
+                optionsChrome.setExperimentalOption("excludeSwitches", new String[]{"enable-automation"});
+                return driver = new ChromeDriver(optionsChrome);
+        }
+    }
     @AfterMethod
-   public void closeBrowser(){
-        driver.quit();
+    public void tearDown() {
+        THREAD_LOCAL.get().close();
+        THREAD_LOCAL.remove();
     }
 
-//    @AfterMethod
-//    public void tearDown(){
-//        threadDriver.get().close();
-//        threadDriver.remove();
-//    }
 
 
 }

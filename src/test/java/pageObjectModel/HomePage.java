@@ -1,4 +1,4 @@
-package PageObjectModel;
+package pageObjectModel;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
@@ -19,23 +19,25 @@ public class HomePage extends BasePage{
     WebElement selectPlaylist;
     @FindBy(css = "[name='name']")
     WebElement newPlaylistNameField;
-    @FindBy(css="img.avatar")
+    @FindBy(css="img[class='avatar']")
     WebElement userAvatarIcon;
+    @FindBy(css = "a.view-profile")
+    WebElement profileBtn;
+
+    @FindBy (css = "a.view-profile>span")
+    WebElement profileName;
+
 
     //Helpers
     public void doubleClickOnSelectedPlaylist() {
       doubleClick(selectPlaylist);
     }
     public void enterNewPlaylistName(String playlistName){
-//        newPlaylistNameField.sendKeys(Keys.chord(Keys.COMMAND,"A",Keys.BACK_SPACE));
-//        newPlaylistNameField.sendKeys(newNamePlaylist);
-//        newPlaylistNameField.sendKeys(Keys.ENTER);
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.chord(Keys.COMMAND, "A", Keys.BACK_SPACE));
         findElement(newPlaylistNameField).sendKeys(playlistName);
         findElement(newPlaylistNameField).sendKeys(Keys.ENTER);
     }
-
 
     public WebElement getUserAvatar(){
         return findElement(userAvatarIcon);
@@ -49,4 +51,12 @@ public class HomePage extends BasePage{
         actions.moveToElement(play).perform();
         return wait.until(ExpectedConditions.visibilityOf(play));
     }
+    public void clickProfile () {
+        wait.until(ExpectedConditions.visibilityOf(profileBtn)).click();
+    }
+
+    public WebElement getProfileName(){
+        return findElement(profileName);
+    }
+
 }

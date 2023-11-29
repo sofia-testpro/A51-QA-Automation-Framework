@@ -1,17 +1,8 @@
-import PageObjectModel.AllSongsPage;
-import PageObjectModel.HomePage;
-import PageObjectModel.LoginPage;
-import com.fasterxml.jackson.annotation.JsonUnwrapped;
-import org.openqa.selenium.By;
-import org.openqa.selenium.Keys;
-import org.openqa.selenium.WebElement;
-import org.openqa.selenium.support.ui.ExpectedCondition;
-import org.openqa.selenium.support.ui.ExpectedConditions;
+import pageObjectModel.AllSongsPage;
+import pageObjectModel.HomePage;
+import pageObjectModel.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import javax.print.DocFlavor;
-import java.util.List;
 
 public class HomeTest extends BaseTest {
     String newPlaylistName = "Sample Edited Playlist";
@@ -20,13 +11,13 @@ public class HomeTest extends BaseTest {
     //TESTS START HERE
     @Test
     public void playSong(){
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
-        AllSongsPage songsPage = new AllSongsPage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
         //login
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
 
         homePage.chooseAllSongsList();
 
@@ -37,19 +28,25 @@ public class HomeTest extends BaseTest {
         Assert.assertTrue(songsPage.isSongPlaying());
     }
     @Test
-    public void hoverOverPlayBtn() throws InterruptedException {
+    public void hoverOverPlayBtn() {
         //login
-        LoginPage loginPage = new LoginPage(driver);
-        HomePage homePage = new HomePage(driver);
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmail("demo@class.com");
-        loginPage.providePassword("te$t$tudent");
-        loginPage.clickSubmit();
-        Thread.sleep(2000);
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
 
         //assertion
         Assert.assertTrue(homePage.hoverPlay().isDisplayed());
     }
+
+
+
+
+
+
+
 //    @Test
 //    public void countSongsInPlaylist() throws InterruptedException {
 //        provideEmail("demo@class.com");
@@ -65,18 +62,18 @@ public class HomeTest extends BaseTest {
 //        //assertions
 //        Assert.assertTrue(getPlaylistDetails().contains(String.valueOf(countSongs())));
 //    }
-    public void renamePlaylist() throws InterruptedException {
-
-        String updatedPlaylistMsg = "Updated playlist \"Sample Edited Playlist.\"";
-
-        provideEmail("demo@class.com");
-        providePassword("te$t$tudent");
-        clickSubmit();
-        Thread.sleep(2000);
-        doubleClickPlaylist();
-        enterNewPlaylistName();
-        Assert.assertEquals(getRenamedPlaylistSuccessMsg(), updatedPlaylistMsg);
-    }
+//    public void renamePlaylist() throws InterruptedException {
+//
+//        String updatedPlaylistMsg = "Updated playlist \"Sample Edited Playlist.\"";
+//
+//        provideEmail("demo@class.com");
+//        providePassword("te$t$tudent");
+//        clickSubmit();
+//        Thread.sleep(2000);
+//        doubleClickPlaylist();
+//        enterNewPlaylistName();
+//        Assert.assertEquals(getRenamedPlaylistSuccessMsg(), updatedPlaylistMsg);
+//    }
 
     //    @Test
 //    public void hoverOverPlayButton() {
@@ -109,37 +106,37 @@ public class HomeTest extends BaseTest {
 
 
     //HELPER METHODS START HERE
-    public void doubleClickPlaylist(){
-        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist;nth-child(3)")));
-        actions.doubleClick(playlistElement).perform();
-    }
-    public void enterNewPlaylistName() {
-        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
-        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
-        playlistInputField.sendKeys(newPlaylistName);
-        playlistInputField.sendKeys(Keys.ENTER);
-    }
-    public String getRenamedPlaylistSuccessMsg(){
-        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
-        return notification.getText();
-    }
-
-    public void choosePlaylistByName(String playlistName){
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'"+playlistName+"']"))).click();
-    }
-    public int countSongs(){
-        return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
-    }
-    public String getPlaylistDetails(){
-        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
-    }
-    public void displayAllSongs(){
-        List<WebElement> songlist = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
-        System.out.println("Number of songs found:"+ countSongs());
-        for (WebElement e: songlist){
-            System.out.println(e.getText());
-        }
-    }
+//    public void doubleClickPlaylist(){
+//        WebElement playlistElement = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector(".playlist;nth-child(3)")));
+//        actions.doubleClick(playlistElement).perform();
+//    }
+//    public void enterNewPlaylistName() {
+//        WebElement playlistInputField = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[name='name']")));
+//        playlistInputField.sendKeys(Keys.chord(Keys.CONTROL,"A",Keys.BACK_SPACE));
+//        playlistInputField.sendKeys(newPlaylistName);
+//        playlistInputField.sendKeys(Keys.ENTER);
+//    }
+//    public String getRenamedPlaylistSuccessMsg(){
+//        WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
+//        return notification.getText();
+//    }
+//
+//    public void choosePlaylistByName(String playlistName){
+//        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//a[contains(text(),'"+playlistName+"']"))).click();
+//    }
+//    public int countSongs(){
+//        return driver.findElements(By.cssSelector("section#playlistWrapper td.title")).size();
+//    }
+//    public String getPlaylistDetails(){
+//        return driver.findElement(By.cssSelector("span.meta.text-secondary span.meta")).getText();
+//    }
+//    public void displayAllSongs(){
+//        List<WebElement> songlist = driver.findElements(By.cssSelector("section#playlistWrapper td.title"));
+//        System.out.println("Number of songs found:"+ countSongs());
+//        for (WebElement e: songlist){
+//            System.out.println(e.getText());
+//        }
+//    }
 //    public WebElement hoverPlay() {
 //        WebElement play= driver.findElement(By.cssSelector("[data-testid='play-btn']"));
 //       // WebElement play = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='play-btn']")));
