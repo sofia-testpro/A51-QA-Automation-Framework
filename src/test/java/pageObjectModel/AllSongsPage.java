@@ -4,7 +4,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
-public class AllSongsPage extends BasePage{
+public class AllSongsPage extends BasePage {
 
     public AllSongsPage(WebDriver givenDriver){
         super(givenDriver);
