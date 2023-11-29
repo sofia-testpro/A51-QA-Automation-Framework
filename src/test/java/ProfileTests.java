@@ -30,7 +30,7 @@ public class ProfileTests extends BaseTest {
         String name = profilePage.generateRandomName();
         profilePage.provideProfileName(name);
         profilePage.clickSave();
-        Thread.sleep(2000);
+        TimeUnit.MILLISECONDS.sleep(1000);
         Assert.assertEquals(homePage.getProfileName().getText(), name);
     }
 }
