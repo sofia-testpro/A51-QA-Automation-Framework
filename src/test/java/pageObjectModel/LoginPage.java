@@ -20,6 +20,8 @@ public class LoginPage extends BasePage {
 
     @FindBy (css = "a[href='registration']")
      WebElement registrationLink;
+    @FindBy (css = "[class='logo']")
+    WebElement koelAppLogo;
 
     public LoginPage provideEmailToLogin(String email){
         emailTxtField.sendKeys(email);
@@ -35,6 +37,18 @@ public class LoginPage extends BasePage {
     }
     public WebElement getRegistrationLink(){
         return findElement (registrationLink);
+    }
+
+    public void provideLoginSucceed(){
+        provideEmailToLogin("lolitamantsiuk@gmail.com");
+        providePasswordToLogin("te$t$tudent");
+        clickSubmitBtn();
+    }
+
+    public WebElement getKoelLogo() {
+            return findElement(koelAppLogo);
+        }
+
     }
 
 
@@ -54,11 +68,5 @@ public class LoginPage extends BasePage {
 //    public void clickSubmit(){
 //        findElement((WebElement) submitBtn).click();
 //    }
-    public void provideLoginSucceed(){
-        provideEmailToLogin("lolitamantsiuk@gmail.com");
-        providePasswordToLogin("te$t$tudent");
-        clickSubmitBtn();
-    }
 
 
-}
