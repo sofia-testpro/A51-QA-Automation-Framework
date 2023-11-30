@@ -1,5 +1,6 @@
 package pageObjectModel;
 
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.interactions.Actions;
@@ -31,6 +32,14 @@ public class BasePage {
         actions.doubleClick(findElement(webElement)).perform();
     }
 
+    public Boolean isTextPresentInElement(WebElement webElement, String text) {
+        try {
+            wait.until(ExpectedConditions.textToBePresentInElement(webElement, text));
+            return true;  // Return true if the text is present
+        } catch (TimeoutException e) {
+            return false;  // Return false if the text is not present within the timeout
+        }
+    }
 
 
 }

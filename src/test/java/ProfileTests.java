@@ -30,7 +30,10 @@ public class ProfileTests extends BaseTest {
         String name = profilePage.generateRandomName();
         profilePage.provideProfileName(name);
         profilePage.clickSave();
-        Thread.sleep(2000);
+
+        basePage.isTextPresentInElement(homePage.getProfileName(), name);
+        System.out.println("Expected Profile Name: " + name);
+        System.out.println("Actual Profile Name: " + homePage.getProfileName());
         Assert.assertEquals(homePage.getProfileName().getText(), name);
     }
 }

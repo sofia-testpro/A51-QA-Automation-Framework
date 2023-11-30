@@ -35,9 +35,51 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("demo@class.com")
-                .providePasswordToLogin("te$t$tudent")
-                .clickSubmitBtn();
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    @Test
+    public static void loginEmptyEmailPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+    @Test
+    public static void loginEmptyPasswordTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
+    @Test
+    public static void loginWrongEmailTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("demo@class.com");
+        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+
+    @Test
+    public void loginSucceedTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+
+        loginPage.provideLoginSucceed();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
