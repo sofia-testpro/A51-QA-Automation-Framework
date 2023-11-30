@@ -54,11 +54,11 @@ public class LoginPage extends BasePage {
 //    public void clickSubmit(){
 //        findElement((WebElement) submitBtn).click();
 //    }
-//    public void login(){
-//        provideEmail("demo@class.com");
-//        providePassword("te$t$tudent");
-//        clickSubmit();
-//    }
+    public void provideLoginSucceed(){
+        provideEmailToLogin("lolitamantsiuk@gmail.com");
+        providePasswordToLogin("te$t$tudent");
+        clickSubmitBtn();
+    }
 
 
 }
