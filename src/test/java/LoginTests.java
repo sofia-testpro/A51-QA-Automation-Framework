@@ -14,7 +14,7 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
         loginPage.providePasswordToLogin("te$t$tudent");
         loginPage.clickSubmitBtn();
-        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
     @Test
@@ -29,21 +29,8 @@ public class LoginTests extends BaseTest {
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
 
-    // FLUENT WAY STARTS HERE
     @Test
-    public void loginValidEmailPasswordByPageFactory() {
-        LoginPage loginPage = new LoginPage(getThreadLocal());
-        HomePage homePage = new HomePage(getThreadLocal());
-
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
-        loginPage.clickSubmitBtn();
-
-        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
-    }
-
-    @Test
-    public static void loginEmptyEmailPasswordTest() {
+    public static void loginEmptyEmailTest() {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.provideEmailToLogin("");
