@@ -35,9 +35,6 @@ import static java.sql.DriverManager.getDriver;
 
 public class BaseTest {
 
-//    public static String url = "https://qa.koel.app/";
-//    public static String loggedInURL = "https://qa.koel.app/#!/home";
-
     private static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
     private WebDriver driver = null;
     private int timeSeconds = 3;
