@@ -39,7 +39,7 @@ public class LoginPage extends BasePage {
     }
     public void provideLoginSucceed() {
         provideEmailToLogin("lolitamantsiuk@gmail.com");
-        providePasswordToLogin("te$t$tudent");
+        providePasswordToLogin("te$t$tudent1");
         clickSubmitBtn();
     }
 }

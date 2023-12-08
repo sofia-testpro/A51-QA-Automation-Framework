@@ -53,24 +53,24 @@ public class BaseTest {
                 "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
     }
 
-    public WebDriver lambdaTest() throws MalformedURLException {
-        String username = "lolitamantsiuk";
-        String authKey = "lbML3dcaXJBvJIy9SbPQ6K0K2AdvgIlecTl2FHkzwBXwreEVsh";
-        String hub ="@hub.lambdatest.com/wd/hub";
-        DesiredCapabilities caps = new DesiredCapabilities();
-        caps.setCapability("platform","macOS Monterey 12.3.1");
-        caps.setCapability("browserName","Chrome 119");
-        caps.setCapability("resolution","12024x76");
-        caps.setCapability("build","TestNG with Java");
-        caps.setCapability("name",this.getClass().getName());
-        caps.setCapability("plugin","java-testNG");
-
-        return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey+ hub), caps);
-    }
+//    public WebDriver lambdaTest() throws MalformedURLException {
+//        String username = "lolitamantsiuk";
+//        String authKey = "lbML3dcaXJBvJIy9SbPQ6K0K2AdvgIlecTl2FHkzwBXwreEVsh";
+//        String hub ="@hub.lambdatest.com/wd/hub";
+//        DesiredCapabilities caps = new DesiredCapabilities();
+//        caps.setCapability("platform","macOS Monterey 12.3.1");
+//        caps.setCapability("browserName","Chrome 119");
+//        caps.setCapability("resolution","12024x76");
+//        caps.setCapability("build","TestNG with Java");
+//        caps.setCapability("name",this.getClass().getName());
+//        caps.setCapability("plugin","java-testNG");
+//
+//        return new RemoteWebDriver(new URL("https://" +username+ ":" +authKey+ hub), caps);
+//    }
 
     public WebDriver pickBrowser(String browser) throws MalformedURLException {
         DesiredCapabilities capabilities = new DesiredCapabilities();
-        String gridURL = "http://10.2.127.17:4444";
+        String gridURL = "http://192.168.1.90:4444";
 
         switch (browser) {
             case "firefox":
@@ -90,8 +90,8 @@ public class BaseTest {
             case "grid-chrome":
                 capabilities.setCapability("browserName", "chrome");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
-            case "cloud":
-                return lambdaTest();
+//            case "cloud":
+//                return lambdaTest();
             default:
                 WebDriverManager.chromedriver().setup();
                 ChromeOptions optionsChrome = new ChromeOptions();

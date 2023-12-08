@@ -18,6 +18,8 @@ public class ProfilePage extends BasePage {
     WebElement profileName;
     @FindBy (css = "button.btn-submit")
     WebElement saveBtn;
+    @FindBy (css = "[name='email']")
+    WebElement profileEmail;
 
 
     public void provideCurrentPassword (String currentPassword){
@@ -27,12 +29,16 @@ public class ProfilePage extends BasePage {
     public String generateRandomName(){
         return UUID.randomUUID().toString().replace("-","");
     }
-    public void provideProfileName(String name){
+    public void  provideProfileName(String name){
         profileName.clear();
         profileName.sendKeys(name);
     }
     public void clickSave(){
         saveBtn.click();
+    }
+    public void provideNewEmail(String email){
+        profileEmail.clear();
+        profileEmail.sendKeys(email);
     }
 
 }
