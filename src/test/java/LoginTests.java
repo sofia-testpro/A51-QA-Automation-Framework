@@ -1,7 +1,9 @@
+import pageObjectModel.BasePage;
 import pageObjectModel.HomePage;
 import pageObjectModel.LoginPage;
 import org.testng.Assert;
 import org.testng.annotations.Test;
+import pageObjectModel.ProfilePage;
 
 public class LoginTests extends BaseTest {
 
@@ -12,7 +14,7 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
@@ -23,7 +25,7 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
 
         loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
@@ -34,7 +36,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.provideEmailToLogin("");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
@@ -54,8 +56,8 @@ public class LoginTests extends BaseTest {
     public static void loginWrongEmailTest() {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("demo@class.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.provideEmailToLogin("lolitamantsiukgmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
@@ -69,5 +71,37 @@ public class LoginTests extends BaseTest {
         loginPage.provideLoginSucceed();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    @Test
+    public void loginUpdatedEmailTest(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        ProfilePage profilePage = new ProfilePage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.clickSubmitBtn();
+
+        profilePage.provideNewEmail("lolitaharlan1@gmail.com");
+        profilePage.clickSave();
+        homePage.logOut();
+
+        loginPage.provideEmailToLogin("lolitaharlan1@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
+
+        Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
+    }
+
+    @Test
+    public void loginOldEmailDoesntWorkTest(){
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.clickSubmitBtn();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+
     }
 }

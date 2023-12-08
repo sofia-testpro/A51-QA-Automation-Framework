@@ -25,9 +25,12 @@ public class HomePage extends BasePage{
     WebElement profileBtn;
     @FindBy (css = "a.view-profile>span")
     WebElement profileName;
+    @FindBy (css = "a.logout.control")
+    WebElement logOutBtn;
 
 
     //Helpers
+
     public void doubleClickOnSelectedPlaylist() {
       doubleClick(selectPlaylist);
     }
@@ -64,5 +67,9 @@ public class HomePage extends BasePage{
         WebElement notification = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("div.success.show")));
         return notification.getText();
     }
+    public void logOut(){
+        findElement(logOutBtn).click();
+    }
+
 
 }

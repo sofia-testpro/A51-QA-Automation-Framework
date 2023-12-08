@@ -12,8 +12,8 @@ public class HomeTest extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("demo@class.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         homePage.chooseAllSongsList();
@@ -29,8 +29,8 @@ public class HomeTest extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("demo@class.com");
-        loginPage.providePasswordToLogin("te$t$tudent");
+        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.hoverPlay().isDisplayed());
