@@ -23,11 +23,11 @@ public class LoginPage extends BasePage {
 
 
     public LoginPage provideEmailToLogin(String email) {
-        emailTxtField.sendKeys(email);
+            findElement(emailTxtField).sendKeys(email);
         return this;
     }
     public LoginPage providePasswordToLogin(String password) {
-        passwordTxtField.sendKeys(password);
+        findElement(passwordTxtField).sendKeys(password);
         return this;
     }
     public LoginPage clickSubmitBtn() {

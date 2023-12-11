@@ -36,8 +36,8 @@ import static java.sql.DriverManager.getDriver;
 public class BaseTest {
 
     private static final ThreadLocal<WebDriver> THREAD_LOCAL = new ThreadLocal<>();
-    private WebDriver driver = null;
-    private int timeSeconds = 3;
+    private WebDriver driver;
+    private int timeSeconds = 10;
     public static WebDriver getThreadLocal() {
         return THREAD_LOCAL.get();
     }
@@ -46,7 +46,7 @@ public class BaseTest {
     @BeforeMethod
     @Parameters({"baseURL"})
     public void setUpBrowser(@Optional String baseURL) throws MalformedURLException {
-        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser")));
+        THREAD_LOCAL.set(pickBrowser(System.getProperty("browser", "")));
         THREAD_LOCAL.get().manage().timeouts().implicitlyWait(Duration.ofSeconds(timeSeconds));
         getThreadLocal().get(baseURL);
         System.out.println(
@@ -87,9 +87,9 @@ public class BaseTest {
             case "grid-edge":
                 capabilities.setCapability("browserName", "edge");
                 return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
-            case "grid-chrome":
-                capabilities.setCapability("browserName", "chrome");
-                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
+//            case "grid-chrome":
+//                capabilities.setCapability("browserName", "chrome");
+//                return driver = new RemoteWebDriver(URI.create(gridURL).toURL(), capabilities);
 //            case "cloud":
 //                return lambdaTest();
             default:
