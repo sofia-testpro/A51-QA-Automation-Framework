@@ -74,7 +74,7 @@ public class LoginTests extends BaseTest {
     }
 
     @Test
-    public void loginUpdatedEmailTest(){
+    public void loginUpdateEmailTest(){
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
         ProfilePage profilePage = new ProfilePage(getThreadLocal());
@@ -82,13 +82,24 @@ public class LoginTests extends BaseTest {
         loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
         loginPage.providePasswordToLogin("te$t$tudent1");
         loginPage.clickSubmitBtn();
-
+        homePage.clickProfile();
+        profilePage.provideCurrentPassword("te$t$tudent1");
         profilePage.provideNewEmail("lolitaharlan1@gmail.com");
         profilePage.clickSave();
+
         homePage.logOut();
+
+        Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
+    }
+    @Test
+    public void loginWithUpdatedEmailTest() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        ProfilePage profilePage = new ProfilePage(getThreadLocal());
 
         loginPage.provideEmailToLogin("lolitaharlan1@gmail.com");
         loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
