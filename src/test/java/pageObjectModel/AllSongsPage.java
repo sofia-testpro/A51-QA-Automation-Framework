@@ -21,4 +21,8 @@ public class AllSongsPage extends BasePage {
         WebElement soundBarVisualizer = wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("[data-testid='sound-bar-play']")));
         return soundBarVisualizer.isDisplayed();
     }
+
+    public void navigateToHomepage(){
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.cssSelector("a[href='#!/home']"))).click();
+    }
 }
