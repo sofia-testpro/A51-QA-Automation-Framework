@@ -178,8 +178,8 @@ public class HomeTest extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.hoverPlay().isDisplayed());

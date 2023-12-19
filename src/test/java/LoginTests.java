@@ -13,8 +13,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
     }
@@ -24,8 +24,8 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
@@ -36,7 +36,7 @@ public class LoginTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
         loginPage.provideEmailToLogin("");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
@@ -45,7 +45,7 @@ public class LoginTests extends BaseTest {
     public static void loginEmptyPasswordTest() {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
         loginPage.providePasswordToLogin("");
         loginPage.clickSubmitBtn();
 
@@ -56,8 +56,8 @@ public class LoginTests extends BaseTest {
     public static void loginWrongEmailTest() {
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiukgmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
@@ -79,11 +79,11 @@ public class LoginTests extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
         ProfilePage profilePage = new ProfilePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
         homePage.clickProfile();
-        profilePage.provideCurrentPassword("te$t$tudent1");
+        profilePage.provideCurrentPassword("Te$t$tudent1");
         profilePage.provideNewEmail("lolitaharlan1@gmail.com");
         profilePage.clickSave();
 
@@ -98,7 +98,7 @@ public class LoginTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(getThreadLocal());
 
         loginPage.provideEmailToLogin("lolitaharlan1@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(homePage.getUserAvatar().isDisplayed());
@@ -108,8 +108,8 @@ public class LoginTests extends BaseTest {
     public void loginOldEmailDoesntWorkTest(){
         LoginPage loginPage = new LoginPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        loginPage.providePasswordToLogin("Te$t$tudent1");
         loginPage.clickSubmitBtn();
 
         Assert.assertTrue(loginPage.getRegistrationLink().isDisplayed());
