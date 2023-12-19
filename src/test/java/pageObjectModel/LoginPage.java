@@ -38,8 +38,8 @@ public class LoginPage extends BasePage {
         return findElement(registrationLink);
     }
     public void provideLoginSucceed() {
-        provideEmailToLogin("lolitamantsiuk@gmail.com");
-        providePasswordToLogin("te$t$tudent1");
+        provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
+        providePasswordToLogin("Te$t$tudent1");
         clickSubmitBtn();
     }
 }

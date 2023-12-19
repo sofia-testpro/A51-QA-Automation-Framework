@@ -41,6 +41,8 @@ public class BasePage {
         } catch (TimeoutException e) {
             return false;  // Return false if the text is not present within the timeout
         }
+
+//
 //    protected List<WebElement> findElements (By locator) {
 //            List <WebElement> elements;
 //            elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
@@ -48,5 +50,4 @@ public class BasePage {
 //        }
     }
 
-
-}
+    }
