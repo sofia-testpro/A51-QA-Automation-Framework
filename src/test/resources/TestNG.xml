@@ -10,7 +10,8 @@
 <!--            <class name="HomeTest"/>-->
 <!--            <class name="LoginTests"/>-->
 <!--            <class name="LogoutTests"/>-->
-            <class name="RegistrationTest"/>
+<!--            <class name="RegistrationTest"/>-->
+            <class name = "UpdateEmailTests"/>
         </classes>
     </test>
 </suite>

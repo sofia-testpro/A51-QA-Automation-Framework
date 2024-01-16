@@ -22,11 +22,11 @@ public class ProfileTests extends BaseTest {
         ProfilePage profilePage = new ProfilePage(getThreadLocal());
         BasePage basePage = new BasePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
-        loginPage.providePasswordToLogin("Te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk@testpro.io");
+        loginPage.providePasswordToLogin("Te$tPro123!");
         loginPage.clickSubmitBtn();
         homePage.clickProfile();
-        profilePage.provideCurrentPassword("Te$t$tudent1");
+        profilePage.provideCurrentPassword("Te$tPro123!");
         String name = profilePage.generateRandomName();
         profilePage.provideProfileName(name);
         profilePage.clickSave();

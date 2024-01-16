@@ -20,6 +20,12 @@ public class ProfilePage extends BasePage {
     WebElement saveBtn;
     @FindBy (css = "[name='email']")
     WebElement profileEmail;
+    @FindBy (css = "div.success.show")
+    WebElement successMessage;
+    @FindBy (css = "p[class='password-rules help']")
+    WebElement validationText;
+    @FindBy (css = "div.error.show")
+    WebElement errorMessage;
 
 
     public void provideCurrentPassword (String currentPassword){
@@ -39,6 +45,21 @@ public class ProfilePage extends BasePage {
     public void provideNewEmail(String email){
         profileEmail.clear();
         profileEmail.sendKeys(email);
+    }
+
+    public boolean successMessageShow () {
+        return successMessage.isEnabled();
+    }
+
+    public String getValidationMsg() {
+        return findElement(profileEmail).getAttribute("validationMessage");
+    }
+
+    public boolean validationTextPresent(){
+        return validationText.isDisplayed();
+    }
+    public boolean errorMessageShow(){
+        return errorMessage.isEnabled();
     }
 
 }
