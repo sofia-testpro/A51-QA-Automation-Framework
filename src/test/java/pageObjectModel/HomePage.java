@@ -112,6 +112,7 @@ public class HomePage extends BasePage{
     public void accessSearchField(){
         wait.until(ExpectedConditions.visibilityOf(searchField)).click();
     }
+
     public WebElement getSearchField(){
         return findElement(searchField);
     }

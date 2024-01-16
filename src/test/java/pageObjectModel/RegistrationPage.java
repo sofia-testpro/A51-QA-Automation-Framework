@@ -36,16 +36,13 @@ public class RegistrationPage extends BasePage {
    }
 
    public boolean confirmationMsgEnabled() {
-       return confirmationMessage.isEnabled();
+       return confirmationMessage.isDisplayed();
    }
 
    public String getError() {
        return findElement(errorMessage).getText();
    }
 
-   public boolean errorEnabled() {
-       return errorMessage.isEnabled();
-   }
 
     public String getValidationMsg() {
         return findElement(emailRegistrationTxtField).getAttribute("validationMessage");
