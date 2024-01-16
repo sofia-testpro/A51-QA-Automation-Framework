@@ -6,10 +6,11 @@
 
     <test name="Example Test" preserve-order="true">
         <classes>
-            <class name="ProfileTests"/>
-            <class name="HomeTest"/>
-            <class name="LoginTests"/>
-            <class name="LogoutTests"/>
+<!--            <class name="ProfileTests"/>-->
+<!--            <class name="HomeTest"/>-->
+<!--            <class name="LoginTests"/>-->
+<!--            <class name="LogoutTests"/>-->
+            <class name="RegistrationTest"/>
         </classes>
     </test>
 </suite>

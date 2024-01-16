@@ -17,20 +17,22 @@ public class BasePage {
     public WebDriverWait wait;
     protected Actions actions;
 
-    public BasePage(WebDriver givenDriver){
+    public BasePage(WebDriver givenDriver) {
         driver = givenDriver;
         wait = new WebDriverWait(driver, Duration.ofSeconds(10));
         actions = new Actions(driver);
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement findElement(WebElement webElement){
+    public WebElement findElement(WebElement webElement) {
         return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
-    public void click (WebElement webElement){
+
+    public void click(WebElement webElement) {
         findElement(webElement).click();
     }
-    public void doubleClick(WebElement webElement){
+
+    public void doubleClick(WebElement webElement) {
         actions.doubleClick(findElement(webElement)).perform();
     }
 
@@ -42,12 +44,13 @@ public class BasePage {
             return false;  // Return false if the text is not present within the timeout
         }
 
-//
-//    protected List<WebElement> findElements (By locator) {
-//            List <WebElement> elements;
-//            elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
+
+//        protected List<WebElement> findElements (By locator) {
+//        elements = wait.until(ExpectedConditions.visibilityOfAllElementsLocatedBy(locator));
 //            return elements;
 //        }
-    }
+//        By locator = driver.findElements(By.xpath("//ol[@class=\"recently-added-album-list\"]//span[text()='by']"));
 
     }
+
+}
