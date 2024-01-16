@@ -80,7 +80,7 @@ public class HomePage extends BasePage{
     }
 
     public void clickProfile () {
-        wait.until(ExpectedConditions.visibilityOf(profileBtn)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(profileBtn)).click();
     }
 
     public WebElement getProfileName(){
