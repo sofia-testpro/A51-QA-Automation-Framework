@@ -1,3 +1,5 @@
+import io.cucumber.java.bs.A;
+import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjectModel.HomePage;
 import pageObjectModel.LoginPage;
@@ -22,16 +24,41 @@ public class SearchTests extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
         SearchPage searchPage = new SearchPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lalita.mann@testpro.io");
-        loginPage.providePasswordToLogin("Te$tPro123!");
-        loginPage.clickSubmitBtn();
+        loginPage.provideLoginSucceed();
 
         homePage.accessSearchField();
         searchPage.searchSend("day");
 
-
-
-
+        Assert.assertTrue(searchPage.verifyMatchingSongResults("day"));
     }
+    @Test
+    public void testArtistNameResults() {
+        LoginPage loginPage = new LoginPage(getThreadLocal());
+        HomePage homePage = new HomePage(getThreadLocal());
+        SearchPage searchPage = new SearchPage(getThreadLocal());
 
+        String songName = "dark";
+
+        loginPage.provideLoginSucceed();
+
+        homePage.accessSearchField();
+        searchPage.searchSend(songName);
+
+        Assert.assertEquals(searchPage.getArtistName(), songName);
+   }
+   @Test
+    public void testAlbumNameResults() {
+       LoginPage loginPage = new LoginPage(getThreadLocal());
+       HomePage homePage = new HomePage(getThreadLocal());
+       SearchPage searchPage = new SearchPage(getThreadLocal());
+
+       String songName = "miss";
+
+       loginPage.provideLoginSucceed();
+
+       homePage.accessSearchField();
+       searchPage.searchSend(songName);
+
+       Assert.assertEquals(searchPage.getAlbumName(), songName);
+    }
 }

@@ -7,4 +7,6 @@ public class FavoritesPage extends BasePage {
         super(givenDriver);
     }
 
+
+
 }
