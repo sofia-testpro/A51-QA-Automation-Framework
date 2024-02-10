@@ -51,10 +51,15 @@ public class HomePage extends BasePage{
     WebElement aboutKoelBtn;
     @FindBy (css ="p[class='current-version']")
     WebElement currentKoelVersion;
+    @FindBy (css = "a[class='artists']")
+    WebElement artistsPage;
 
 
 
     //Helpers
+    public void clickArtists(){
+        wait.until(ExpectedConditions.visibilityOf(artistsPage)).click();
+    }
     public void doubleClickOnSelectedPlaylist() {
       doubleClick(selectPlaylist);
     }

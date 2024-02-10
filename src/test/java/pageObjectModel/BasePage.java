@@ -14,7 +14,7 @@ import java.util.List;
 
 public class BasePage {
     protected WebDriver driver;
-    public WebDriverWait wait;
+    protected WebDriverWait wait;
     protected Actions actions;
 
     public BasePage(WebDriver givenDriver) {
@@ -24,15 +24,15 @@ public class BasePage {
         PageFactory.initElements(driver, this);
     }
 
-    public WebElement findElement(WebElement webElement) {
+    protected WebElement findElement(WebElement webElement) {
         return wait.until(ExpectedConditions.visibilityOf(webElement));
     }
 
-    public void click(WebElement webElement) {
+    protected void click(WebElement webElement) {
         findElement(webElement).click();
     }
 
-    public void doubleClick(WebElement webElement) {
+    protected void doubleClick(WebElement webElement) {
         actions.doubleClick(findElement(webElement)).perform();
     }
 
