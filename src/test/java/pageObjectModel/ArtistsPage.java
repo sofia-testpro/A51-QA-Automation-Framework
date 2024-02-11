@@ -26,10 +26,7 @@ public class ArtistsPage extends BasePage {
         wait.until(ExpectedConditions.elementToBeClickable(playArtistButton)).click();
     }
     public Boolean isSoundBarVisible() {
-        wait.until(ExpectedConditions.visibilityOf(soundBars));
-        return soundBars.isDisplayed();
+        WebElement soundBar = wait.until(ExpectedConditions.visibilityOf(soundBars));
+        return soundBar.isDisplayed();
     }
-
-
-
 }

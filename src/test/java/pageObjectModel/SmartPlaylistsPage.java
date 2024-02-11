@@ -54,19 +54,19 @@ public class SmartPlaylistsPage extends BasePage {
 
 
     public void clickCreateNewPlaylistBtn() {
-        actions.moveToElement(createNewPlaylistBtn).perform();
-        wait.until(ExpectedConditions.visibilityOf(createNewPlaylistBtn)).click();
+        //actions.moveToElement(createNewPlaylistBtn).perform();
+        //wait.until(ExpectedConditions.visibilityOf(createNewPlaylistBtn)).click();
+        WebElement createNewPlaylistButton = wait.until(ExpectedConditions.visibilityOf(createNewPlaylistBtn));
+        actions.moveToElement(createNewPlaylistButton).click().perform();
     }
     public void clickNewSmartPlaylist() {
-        actions.moveToElement(newSmartPlaylist).perform();
-        wait.until(ExpectedConditions.visibilityOf(newSmartPlaylist)).click();
+        //actions.moveToElement(newSmartPlaylist).perform();
+        WebElement clickNewSmartPL = wait.until(ExpectedConditions.visibilityOf(newSmartPlaylist));
+        actions.moveToElement(clickNewSmartPL).click().perform();
     }
     public void enterPlaylistName(String name) {
         playlistNameField.clear();
         playlistNameField.sendKeys(name);
-    }
-    public void clickDropdownCriteriaBtn() {
-        wait.until(ExpectedConditions.elementToBeClickable(dropdownCriteriaBtn)).click();
     }
     public void enterCriteria(String criteria) {
         inputCriteriaField.clear();
