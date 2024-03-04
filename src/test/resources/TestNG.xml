@@ -8,13 +8,14 @@
         <classes>
 <!--            <class name = "ProfileTests"/>-->
 <!--            <class name = "HomeTest"/>-->
-<!--            <class name = "LoginTests"/>-->
-<!--            <class name = "LogoutTests"/>-->
+            <class name = "LoginTests"/>
+            <class name = "LogoutTests"/>
+            <class name = "InfoPanelTests"/>
 <!--            <class name = "RegistrationTest"/>-->
 <!--            <class name = "SearchTests"/>-->
 <!--            <class name = "UpdateEmailTests"/>-->
-            <class name = "ArtistsTests"/>
-            <class name = "SmartPlaylistTests"/>
-                    </classes>
-                </test>
-            </suite>
+<!--            <class name = "ArtistsTests"/>-->
+<!--            <class name = "SmartPlaylistTests"/>-->
+                               </classes>
+                           </test>
+                       </suite>

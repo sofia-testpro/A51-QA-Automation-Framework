@@ -53,6 +53,8 @@ public class HomePage extends BasePage{
     WebElement currentKoelVersion;
     @FindBy (css = "a[class='artists']")
     WebElement artistsPage;
+    @FindBy (css = "a.songs")
+    WebElement allSongsPage;
 
 
 
@@ -145,6 +147,9 @@ public class HomePage extends BasePage{
     }
     public WebElement getCurrentKoelVersion(){
         return findElement(currentKoelVersion);
+    }
+    public void clickAllSongsPage () {
+        wait.until(ExpectedConditions.elementToBeClickable(allSongsPage)).click();
     }
 
 
