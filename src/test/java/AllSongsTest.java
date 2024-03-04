@@ -12,8 +12,8 @@ public class AllSongsTest extends BaseTest {
         HomePage homePage = new HomePage(getThreadLocal());
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lolitamantsiuk@gmail.com");
-        loginPage.providePasswordToLogin("te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk@testpro.io");
+        loginPage.providePasswordToLogin("Te$tPro123!");
         loginPage.clickSubmitBtn();
 
         homePage.chooseAllSongsList();
