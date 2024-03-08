@@ -73,7 +73,8 @@ public class HomePage extends BasePage{
     }
 
     public WebElement getUserAvatar(){
-        return findElement(userAvatarIcon);
+        wait.until(ExpectedConditions.elementToBeClickable(userAvatarIcon));
+        return userAvatarIcon;
     }
 
     public void chooseAllSongsList(){
@@ -99,7 +100,7 @@ public class HomePage extends BasePage{
         return notification.getText();
     }
     public void logOut(){
-        findElement(logOutBtn).click();
+       wait.until(ExpectedConditions.visibilityOf(logOutBtn)).click();
     }
 
     public WebElement getRecentlyPlayedSongs(){

@@ -1,5 +1,7 @@
 package pageObjectModel;
 
+import org.openqa.selenium.JavascriptException;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
@@ -9,7 +11,7 @@ public class InfoPanelPage extends BasePage {
     public InfoPanelPage (WebDriver givenDriver) {
         super(givenDriver);
     }
-    @FindBy (css = "button.control.text-uppercase.active")
+    @FindBy (xpath = "//footer[@id='mainFooter']//button[@title='View song information']")
     WebElement infoButton;
     @FindBy (css = "div.tabs")
     WebElement infoPanel;
@@ -25,13 +27,17 @@ public class InfoPanelPage extends BasePage {
     WebElement artistName;
     @FindBy (css = "article.album-info.sidebar")
     WebElement albumNameCover;
-    @FindBy (css = "i.fa.fa-bars")
-    WebElement shuffleButton;
+    @FindBy (xpath = "//div[@id='extraPanelArtist']/article[@class='artist-info sidebar']//i[@class='fa fa-random']")
+    WebElement shuffleButtonArtist;
+    @FindBy (xpath = "//div[@id='extraPanelAlbum']/article[@class='album-info sidebar']//i[@class='fa fa-random']")
+    WebElement shuffleButtonAlbum;
     @FindBy (css = "a.queue.active")
     WebElement currentQueue;
 
     public void clickInfoButton () {
-        wait.until(ExpectedConditions.elementToBeClickable(infoButton)).click();
+        wait.until(ExpectedConditions.visibilityOf(infoButton));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();",infoButton);
     }
     public Boolean infoPanelOpen () {
         wait.until(ExpectedConditions.visibilityOf(infoPanel));
@@ -40,6 +46,11 @@ public class InfoPanelPage extends BasePage {
     public Boolean infoPanelClosed () {
         wait.until(ExpectedConditions.invisibilityOf(infoPanel));
         return true;
+    }
+
+        public boolean infoPanelNotDisplayed() {
+        // Utilizes the waitForElementToBeNotVisible method to check if the user avatar icon is not visible
+        return waitForElementToBeNotVisible(infoPanel);
     }
     public void clickLyricsTab () {
         wait.until(ExpectedConditions.visibilityOf(lyricsTab)).click();
@@ -63,10 +74,14 @@ public class InfoPanelPage extends BasePage {
         return albumNameCover.isDisplayed();
     }
     public void shuffleSongsArtist () {
-        wait.until(ExpectedConditions.elementToBeClickable(shuffleButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(shuffleButtonArtist));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();",shuffleButtonArtist);
     }
     public void shuffleSongsAlbum () {
-        wait.until(ExpectedConditions.elementToBeClickable(shuffleButton)).click();
+        wait.until(ExpectedConditions.elementToBeClickable(shuffleButtonAlbum));
+        JavascriptExecutor js = (JavascriptExecutor) driver;
+        js.executeScript("arguments[0].click();",shuffleButtonAlbum);
     }
     public Boolean queueActive () {
         wait.until(ExpectedConditions.visibilityOf(currentQueue));

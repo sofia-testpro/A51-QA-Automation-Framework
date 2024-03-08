@@ -32,6 +32,21 @@ public class BasePage {
         findElement(webElement).click();
     }
 
+    protected boolean waitForElementToBeNotVisible (WebElement webElement) {
+        // Initialize a flag to track if the web element is not visible
+        boolean isWebElementNotVisible = false;
+        try {
+            // Wait for the given web element to become invisible within 1 second
+            isWebElementNotVisible = new WebDriverWait(driver, Duration.ofSeconds(1)).until(ExpectedConditions
+                    .invisibilityOf(webElement));
+        } catch (TimeoutException e) {
+            // If the element is still visible after waiting, set the flag to true
+            isWebElementNotVisible = true;
+        }
+        // Return whether the web element is not visible
+        return isWebElementNotVisible;
+    }
+
     protected void doubleClick(WebElement webElement) {
         actions.doubleClick(findElement(webElement)).perform();
     }

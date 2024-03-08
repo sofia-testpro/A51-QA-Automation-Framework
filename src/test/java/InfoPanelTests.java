@@ -1,4 +1,5 @@
 import org.apache.xmlbeans.impl.xb.xsdschema.All;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.testng.Assert;
 import org.testng.annotations.Test;
 import pageObjectModel.AllSongsPage;
@@ -24,9 +25,10 @@ public class InfoPanelTests extends BaseTest {
 
         loginPage.provideLoginSucceed();
         infoPanelPage.clickInfoButton();
+
         infoPanelPage.clickInfoButton();
 
-        Assert.assertTrue(infoPanelPage.infoPanelClosed());
+        Assert.assertTrue(infoPanelPage.infoPanelNotDisplayed());
     }
     @Test
     public void lyricsForPlayingSong() {
@@ -36,10 +38,10 @@ public class InfoPanelTests extends BaseTest {
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
+        infoPanelPage.clickInfoButton();
         homePage.clickAllSongsPage();
         songsPage.contextClickFirstSong();
         songsPage.choosePlayOption();
-        infoPanelPage.clickInfoButton();
         infoPanelPage.clickLyricsTab();
 
         Assert.assertTrue(infoPanelPage.lyricsDisplayed());
@@ -52,10 +54,10 @@ public class InfoPanelTests extends BaseTest {
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
+        infoPanelPage.clickInfoButton();
         homePage.clickAllSongsPage();
         songsPage.contextClickFirstSong();
         songsPage.choosePlayOption();
-        infoPanelPage.clickInfoButton();
         infoPanelPage.clickArtistTab();
 
         Assert.assertTrue(infoPanelPage.artistNameDisplayed());
@@ -68,10 +70,10 @@ public class InfoPanelTests extends BaseTest {
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
+        infoPanelPage.clickInfoButton();
         homePage.clickAllSongsPage();
         songsPage.contextClickFirstSong();
         songsPage.choosePlayOption();
-        infoPanelPage.clickInfoButton();
         infoPanelPage.clickAlbumTab();
 
         Assert.assertTrue(infoPanelPage.albumDisplayed());
@@ -84,10 +86,10 @@ public class InfoPanelTests extends BaseTest {
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
+        infoPanelPage.clickInfoButton();
         homePage.clickAllSongsPage();
         songsPage.contextClickFirstSong();
         songsPage.choosePlayOption();
-        infoPanelPage.clickInfoButton();
         infoPanelPage.clickArtistTab();
         infoPanelPage.shuffleSongsArtist();
 
@@ -101,10 +103,10 @@ public class InfoPanelTests extends BaseTest {
         AllSongsPage songsPage = new AllSongsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
+        infoPanelPage.clickInfoButton();
         homePage.clickAllSongsPage();
         songsPage.contextClickFirstSong();
         songsPage.choosePlayOption();
-        infoPanelPage.clickInfoButton();
         infoPanelPage.clickAlbumTab();
         infoPanelPage.shuffleSongsAlbum();
 
