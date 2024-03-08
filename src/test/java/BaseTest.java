@@ -2,6 +2,7 @@ import com.sun.jdi.request.DuplicateRequestException;
 import io.github.bonigarcia.wdm.WebDriverManager;
 import org.bouncycastle.jcajce.BCLoadStoreParameter;
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -52,6 +53,7 @@ public class BaseTest {
         System.out.println(
                 "Browser setup by Thread " + Thread.currentThread().getId() + " and Driver reference is : " + getThreadLocal());
     }
+
 
 //    public WebDriver lambdaTest() throws MalformedURLException {
 //        String username = "lolitamantsiuk";

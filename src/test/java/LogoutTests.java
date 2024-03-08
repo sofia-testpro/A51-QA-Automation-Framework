@@ -11,8 +11,8 @@ public class LogoutTests extends BaseTest {
         LoginPage loginPage = new LoginPage(getThreadLocal());
         HomePage homePage = new HomePage(getThreadLocal());
 
-        loginPage.provideEmailToLogin("lalita.mantsiuk+2@testpro.io");
-        loginPage.providePasswordToLogin("Te$t$tudent1");
+        loginPage.provideEmailToLogin("lalita.mantsiuk+10@testpro.io");
+        loginPage.providePasswordToLogin("Te$tPro123!");
         loginPage.clickSubmitBtn();
         homePage.logOut();
 
