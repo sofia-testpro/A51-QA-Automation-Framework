@@ -20,7 +20,7 @@ public class ArtistsTests extends BaseTest {
         ArtistsPage artistsPage = new ArtistsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
-        homePage.clickArtists();
+        homePage.clickArtistsPage();
 
         Assert.assertTrue(artistsPage.isArtistsListDisplayed());
     }
@@ -31,7 +31,7 @@ public class ArtistsTests extends BaseTest {
         ArtistsPage artistsPage = new ArtistsPage(getThreadLocal());
 
         loginPage.provideLoginSucceed();
-        homePage.clickArtists();
+        homePage.clickArtistsPage();
 
         artistsPage.playArtist();
 

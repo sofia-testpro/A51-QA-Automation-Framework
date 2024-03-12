@@ -26,6 +26,18 @@ public class ProfilePage extends BasePage {
     WebElement validationText;
     @FindBy (css = "div.error.show")
     WebElement errorMessage;
+    @FindBy (css = "#inputProfileNewPassword")
+    WebElement newPasswordField;
+    @FindBy (xpath = "//section[@id='profileWrapper']//section[1]/ul[@class='themes']/li[3]/div")
+    WebElement thirdThemeInTheList;
+    @FindBy (css = ".menu .home")
+    WebElement homePage;
+    @FindBy (css = "html.mac.with-extra-panel")
+    WebElement themeStyle;
+    @FindBy (css = "[data-testid='album-art-overlay']")
+    WebElement overlay;
+    @FindBy (xpath = "//section[@id='profileWrapper']/div[@class='main-scroll-wrap']//input[@name='show_album_art_overlay']")
+    WebElement overlayOption;
 
 
     public void provideCurrentPassword (String currentPassword){
@@ -46,20 +58,39 @@ public class ProfilePage extends BasePage {
         profileEmail.clear();
         profileEmail.sendKeys(email);
     }
-
     public boolean successMessageShow () {
         return successMessage.isEnabled();
     }
-
     public String getValidationMsg() {
         return findElement(profileEmail).getAttribute("validationMessage");
     }
-
     public boolean validationTextPresent(){
         return validationText.isDisplayed();
     }
     public boolean errorMessageShow(){
         return errorMessage.isEnabled();
     }
+    public void provideNewPassword(String password){
+        newPasswordField.clear();
+        newPasswordField.sendKeys(password);
+    }
+    public void changeTheme() {
+        wait.until(ExpectedConditions.elementToBeClickable(thirdThemeInTheList)).click();
+    }
+    public WebElement getThemeName() {
+        return themeStyle;
+    }
+    public void clickHomePage() {
+        wait.until(ExpectedConditions.elementToBeClickable(homePage)).click();
+    }
+    public void clickOverlayOption() {
+        wait.until(ExpectedConditions.visibilityOf(overlayOption));
+        actions.scrollToElement(overlayOption).click();
+    }
+    public boolean isOverlayOn() {
+        wait.until(ExpectedConditions.visibilityOf(overlay));
+        return overlay.isEnabled();
+    }
+
 
 }
