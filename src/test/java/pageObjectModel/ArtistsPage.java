@@ -17,6 +17,10 @@ public class ArtistsPage extends BasePage {
     WebElement playArtistButton;
     @FindBy (css= "img[alt='Sound bars']")
     WebElement soundBars;
+    @FindBy (css = "section#artistsWrapper h1")
+    WebElement artistsPageHeader;
+    @FindBy (xpath = "//section[@id='artistsWrapper']//article[1]//span//span//a[@role='button']")
+    WebElement firstArtistInTheList;
 
 
     public Boolean isArtistsListDisplayed () {
@@ -28,5 +32,13 @@ public class ArtistsPage extends BasePage {
     public Boolean isSoundBarVisible() {
         WebElement soundBar = wait.until(ExpectedConditions.visibilityOf(soundBars));
         return soundBar.isDisplayed();
+    }
+    public boolean artistsPageDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(artistsPageHeader));
+        return artistsPageHeader.isDisplayed();
+    }
+    public void doubleClickArtist() {
+        wait.until(ExpectedConditions.elementToBeClickable(firstArtistInTheList));
+        actions.moveToElement(firstArtistInTheList).doubleClick().perform();
     }
 }

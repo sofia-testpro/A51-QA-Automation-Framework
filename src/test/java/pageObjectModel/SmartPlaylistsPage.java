@@ -51,8 +51,13 @@ public class SmartPlaylistsPage extends BasePage {
     WebElement deleteSmartPlaylist;
     @FindBy (css = "button.ok")
     WebElement okButton;
+    @FindBy (xpath = "/html//section[@id='playlistWrapper']//h1[1]")
+    WebElement createdSmartPlaylistHeader;
 
-
+    public boolean createdSmartPlaylistDisplayed() {
+        wait.until(ExpectedConditions.visibilityOf(createdSmartPlaylistHeader));
+        return createdSmartPlaylistHeader.isDisplayed();
+    }
     public void clickCreateNewPlaylistBtn() {
         //actions.moveToElement(createNewPlaylistBtn).perform();
         //wait.until(ExpectedConditions.visibilityOf(createNewPlaylistBtn)).click();
